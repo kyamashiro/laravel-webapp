@@ -16,6 +16,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Event' => [
             'App\Listeners\EventListener',
         ],
+        //ユーザ登録のイベントリスナーを追加
+        'Illuminate\Auth\Events\Registered' => [
+            'App\Listeners\RegisteredListener'
+        ]
     ];
 
     /**
