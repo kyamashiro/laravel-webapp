@@ -16,4 +16,13 @@ class ReportTest extends TestCase
         $response = $this->get('api/customers');
         $response->assertStatus(200);
     }
+
+    /**
+     * @test
+     */
+    public function api_customersにPOSTメソッドでアクセスできる()
+    {
+        $response = $this->post('api/customers');
+        $response->assertStatus(200);
+    }
 }
