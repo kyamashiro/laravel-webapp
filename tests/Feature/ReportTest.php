@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Http\Response;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -61,8 +62,29 @@ class ReportTest extends TestCase
      */
     public function api_customersにPOSTメソッドでアクセスできる()
     {
-        $response = $this->post('api/customers');
+        $params = ['name' => 'customer_name'];
+        $response = $this->postJson('api/customers', $params);
         $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function api_customersに顧客名をPOSTするとcustomersテーブルにそのデータが追加される()
+    {
+        $params = ['name' => '顧客名'];
+        $this->postJson('api/customers', $params);
+        $this->assertDatabaseHas('customers', $params);
+    }
+
+    /**
+     * @test
+     */
+    public function api_customersにnameが含まれない場合は422UnprocessableEntityが返却される()
+    {
+        $params = [];
+        $response = $this->postJson('api/customers', $params);
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /**

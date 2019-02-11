@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,14 @@ Route::get('customers', function () {
         JSON_UNESCAPED_UNICODE);
 });
 
-Route::post('customers', function () {
+Route::post('customers', function (Request $request) {
+    if (!$request->json('name')) {
+        return response()->json([], Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    $customer = new \App\Customer();
+    $customer->name = $request->json('name');
+    $customer->save();
 });
 
 Route::get('customers/{customer_id}', function () {
