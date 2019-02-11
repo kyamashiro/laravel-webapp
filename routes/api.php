@@ -18,6 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('customers', function () {
+    return response()->json(
+        \App\Customer::query()->select('id', 'name')->get(),
+        200,
+        [],
+        JSON_UNESCAPED_UNICODE);
 });
 
 Route::post('customers', function () {

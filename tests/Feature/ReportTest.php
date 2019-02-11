@@ -30,6 +30,35 @@ class ReportTest extends TestCase
     /**
      * @test
      */
+    public function api_customersにGETメソッドでアクセスするとJSONが返却される()
+    {
+        $response = $this->get('api/customers');
+        $this->assertJson($response->content(), $this->isJson());
+    }
+
+    /**
+     * @test
+     */
+    public function api_customersにGETメソッドで取得できる顧客情報のJSON形式が要件通りである()
+    {
+        $response = $this->get('api/customers');
+        $customers = $response->json();
+        $customer = $customers[0];
+        $this->assertSame(['id', 'name'], array_keys($customer));
+    }
+
+    /**
+     * @test
+     */
+    public function api_customersにGETメソッドでアクセスすると2件の顧客リストが返却される()
+    {
+        $response = $this->get('api/customers');
+        $response->assertJsonCount(2);
+    }
+
+    /**
+     * @test
+     */
     public function api_customersにPOSTメソッドでアクセスできる()
     {
         $response = $this->post('api/customers');
