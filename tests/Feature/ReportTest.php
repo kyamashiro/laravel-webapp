@@ -98,7 +98,7 @@ class ReportTest extends TestCase
             [
                 "errors" => [
                     "name" => [
-                        "name は必須項目です"
+                        "nameは必須です。"
                     ]
                 ],
                 "message" => "The given data was invalid."

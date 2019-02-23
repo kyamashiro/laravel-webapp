@@ -17,8 +17,7 @@ class ApiController extends Controller
     {
         $this->validate(
             $request,
-            ['name' => 'required'],
-            ['name.required' => ':attribute は必須項目です']
+            ['name' => 'required']
         );
 
         $customer = new Customer();
