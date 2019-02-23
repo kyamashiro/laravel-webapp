@@ -15,12 +15,7 @@ class ApiController extends Controller
 
     public function postCustomer(Request $request)
     {
-        if (!$request->json('name')) {
-            return response()->json(
-                [],
-                Response::HTTP_UNPROCESSABLE_ENTITY
-            );
-        }
+        $this->validate($request, ['name' => 'required']);
 
         $customer = new Customer();
         $customer->name = $request->json('name');
@@ -29,41 +24,41 @@ class ApiController extends Controller
 
     public function getCustomer()
     {
-        
+
     }
 
     public function putCustomer()
     {
-        
+
     }
 
     public function deleteCustomer()
     {
-        
+
     }
 
     public function getReports()
     {
-        
+
     }
 
     public function postReport()
     {
-        
+
     }
 
     public function getReport()
     {
-        
+
     }
 
     public function putReport()
     {
-        
+
     }
 
     public function deleteReport()
     {
-        
+
     }
 }
